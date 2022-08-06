@@ -240,6 +240,44 @@ class Solution:
       return False
 </pre>
 
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/unique-paths-iii/" target="_blank">https://leetcode.com/problems/unique-paths-iii/</a></p> 
+<pre> 
+class Solution:
+  def uniquePathsIII(self, grid: List[List[int]]) -> int:
+      def dfs(i, j):
+          nonlocal ans
+          if i == er and j == ec:
+              if len(vis) + 1 == m * n - block:
+                  ans += 1
+              return
+          
+          vis.add((i, j))
+          
+          for ni, nj in [(i - 1, j), (i + 1, j), (i, j - 1), (i, j + 1)]:
+              if 0 <= ni < m and 0 <= nj < n and grid[ni][nj] != -1 and (ni, nj) not in vis:
+                  dfs(ni, nj)
+                  
+          vis.remove((i, j))
+
+      ans = 0
+      vis = set()
+      block = 0
+      sr, sc, er, ec = 0, 0, 0, 0
+      m, n = len(grid), len(grid[0])
+      
+      for i in range(m):
+          for j in range(n):
+              if grid[i][j] == 1:
+                  sr, sc = i, j
+              if grid[i][j] == 2:
+                  er, ec = i, j
+              if grid[i][j] == -1:
+                  block += 1
+
+      dfs(sr, sc)
+      return ans
+</pre>
+
 <p class="text-center text-muted"><a href="https://leetcode.com/problems/number-of-provinces/" target="_blank">https://leetcode.com/problems/number-of-provinces/</a></p> 
 <pre>
 class Solution:
