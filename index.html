@@ -193,6 +193,27 @@ class Solution:
       return ans
 </pre>
 
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/number-of-islands/" target="_blank">https://leetcode.com/problems/number-of-islands/</a></p> 
+<pre>
+class Solution:
+  def numIslands(self, grid: List[List[str]]) -> int:        
+      def dfs(i, j):
+          grid[i][j] = '0'
+          for ni, nj in [(i - 1, j), (i + 1, j), (i, j - 1), (i, j + 1)]:
+              if 0 <= ni < m and 0 <= nj < n and grid[ni][nj] == '1':       
+                  dfs(ni, nj)
+      
+      ans = 0
+      m, n = len(grid), len(grid[0])
+      for i in range(m):
+          for j in range(n):
+              if grid[i][j] == '1':
+                  ans += 1
+                  dfs(i, j)
+                  
+      return ans
+</pre>
+
 <p class="text-center text-muted"><a href="https://leetcode.com/problems/word-search/" target="_blank">https://leetcode.com/problems/word-search/</a></p> 
 <pre>
 class Solution:
