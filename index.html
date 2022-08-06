@@ -240,6 +240,26 @@ class Solution:
       return False
 </pre>
 
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/number-of-provinces/" target="_blank">https://leetcode.com/problems/number-of-provinces/</a></p> 
+<pre>
+class Solution:
+  def findCircleNum(self, isConnected: List[List[int]]) -> int:
+      def dfs(i):
+          vis.add(i)
+          for j in range(n):
+              if isConnected[i][j] and j not in vis:
+                  dfs(j)
+      
+      ans = 0
+      n = len(isConnected)
+      vis = set()
+      for i in range(n):
+          if i not in vis:
+              dfs(i)
+              ans += 1
+              
+      return ans
+</pre>
 
 </div>
       </div>
