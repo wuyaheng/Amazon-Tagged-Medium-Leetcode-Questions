@@ -263,6 +263,38 @@ class Solution:
               elif board[i][j] == 'O': board[i][j] = 'X'
 </pre>
 
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/letter-combinations-of-a-phone-number/" target="_blank">https://leetcode.com/problems/letter-combinations-of-a-phone-number/</a></p> 
+<pre>
+class Solution:
+  def letterCombinations(self, digits: str) -> List[str]:
+      if digits == "":
+          return []
+      
+      d = {
+          "2": "abc",
+          "3": "def",
+          "4": "ghi",
+          "5": "jkl",
+          "6": "mno",
+          "7": "pqrs",
+          "8": "tuv",
+          "9": "wxyz"
+      }
+      
+      ans = []
+      
+      def dfs(cur, j):
+          if j == len(digits):
+              return ans.append(cur)
+          
+          for v in d[digits[j]]:
+              dfs(cur + str(v), j + 1)
+      
+      dfs("", 0)
+      
+      return ans
+</pre>
+
 <p class="text-center text-muted"><a href="https://leetcode.com/problems/unique-paths-iii/" target="_blank">https://leetcode.com/problems/unique-paths-iii/</a></p> 
 <pre> 
 class Solution:
