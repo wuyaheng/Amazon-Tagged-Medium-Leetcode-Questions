@@ -263,6 +263,24 @@ class Solution:
               elif board[i][j] == 'O': board[i][j] = 'X'
 </pre>
 
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/clone-graph/" target="_blank">https://leetcode.com/problems/clone-graph/</a></p> 
+<pre>
+class Solution:
+  def cloneGraph(self, node: 'Node') -> 'Node':
+      def dfs(node):
+          if node is None:
+              return None
+          
+          if node not in d:
+              d[node] = Node(node.val)
+              for v in node.neighbors:
+                  d[node].neighbors.append(dfs(v))
+          return d[node]
+      
+      d = {}
+      return dfs(node)
+</pre>
+
 <p class="text-center text-muted"><a href="https://leetcode.com/problems/letter-combinations-of-a-phone-number/" target="_blank">https://leetcode.com/problems/letter-combinations-of-a-phone-number/</a></p> 
 <pre>
 class Solution:
