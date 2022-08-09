@@ -307,6 +307,26 @@ class Solution:
       return ans
 </pre>
 
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/pacific-atlantic-water-flow/" target="_blank">https://leetcode.com/problems/pacific-atlantic-water-flow/</a></p> 
+<pre>
+class Solution:
+  def pacificAtlantic(self, heights: List[List[int]]) -> List[List[int]]:
+      def dfs(i, j, h):
+          h.add((i, j))
+          for ni, nj in [(i - 1, j), (i + 1, j), (i, j - 1), (i, j + 1)]:
+              if 0 <= ni < m and 0 <= nj < n and heights[ni][nj] >= heights[i][j] and (ni, nj) not in h:
+                  dfs(ni, nj, h)
+      
+      m, n = len(heights), len(heights[0])
+      h1, h2 = set(), set()
+      for i in range(m):
+          for j in range(n):   
+              if i == 0 or j == 0: dfs(i, j, h1)
+              if i == m - 1 or j == n - 1: dfs(i, j, h2)
+                  
+      return list(h1 & h2)
+</pre>
+
 <p class="text-center text-muted"><a href="https://leetcode.com/problems/evaluate-division/" target="_blank">https://leetcode.com/problems/evaluate-division/</a></p> 
 <pre>
 class Solution:
