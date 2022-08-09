@@ -307,6 +307,34 @@ class Solution:
       return ans
 </pre>
 
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/evaluate-division/" target="_blank">https://leetcode.com/problems/evaluate-division/</a></p> 
+<pre>
+class Solution:
+  def calcEquation(self, equations: List[List[str]], values: List[float], queries: List[List[str]]) -> List[float]:
+      def dfs(x, y, i, cur):
+          if x == y:
+              ans[i] = cur
+              return
+          vis.add(x)
+          for z, val in g[x]:
+              if z not in vis:
+                  dfs(z, y, i, cur * val)
+      
+      g = defaultdict(list)
+      for (x, y), z in zip(equations, values):
+          g[x].append((y, z))
+          g[y].append((x, 1/z))
+          
+      ans = [-1] * len(queries)
+      
+      for i, (x, y) in enumerate(queries):
+          vis = set()
+          if x in g and y in g:
+              dfs(x, y, i, 1)
+              
+      return ans
+</pre>
+
 <p class="text-center text-muted"><a href="https://leetcode.com/problems/letter-combinations-of-a-phone-number/" target="_blank">https://leetcode.com/problems/letter-combinations-of-a-phone-number/</a></p> 
 <pre>
 class Solution:
