@@ -513,6 +513,29 @@ class Solution:
       return ans
 </pre>
 
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/is-graph-bipartite/" target="_blank">https://leetcode.com/problems/is-graph-bipartite/</a></p> 
+<pre>
+class Solution:
+  def isBipartite(self, graph: List[List[int]]) -> bool:
+      def dfs(u, c):
+          if u in vis:
+              return vis[u] == c
+          vis[u] = c
+          
+          for v in graph[u]:
+              if not dfs(v, c ^ 1):
+                  return False
+          return True
+      
+      vis = {}
+      n = len(graph)
+      for i in range(n):
+          if i not in vis:
+              if not dfs(i, 0):
+                  return False
+      return True
+</pre>
+
 <p class="text-center text-muted"><a href="https://leetcode.com/problems/number-of-provinces/" target="_blank">https://leetcode.com/problems/number-of-provinces/</a></p> 
 <pre>
 class Solution:
