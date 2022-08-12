@@ -593,6 +593,38 @@ class Solution:
       return True
 </pre>
 
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/shortest-bridge/" target="_blank">https://leetcode.com/problems/shortest-bridge/</a></p> 
+<pre>
+class Solution:
+  def shortestBridge(self, grid: List[List[int]]) -> int:
+      def dfs(i, j):
+          heapq.heappush(q, (0, i, j))
+          vis.add((i, j))
+          
+          for ni, nj in [(i - 1, j), (i + 1, j), (i, j - 1), (i, j + 1)]:
+              if 0 <= ni < m and 0 <= nj < n and grid[ni][nj] == 1 and (ni, nj) not in vis:
+                  dfs(ni, nj)
+                  
+      def bfs():
+          while q:
+              x, i, j = heapq.heappop(q)
+              if x > 0 and grid[i][j] == 1:
+                  return x - 1
+              for ni, nj in [(i - 1, j), (i + 1, j), (i, j - 1), (i, j + 1)]:
+                  if 0 <= ni < m and 0 <= nj < n and (ni, nj) not in vis:
+                      vis.add((ni, nj))
+                      heapq.heappush(q, (x + 1, ni, nj))
+      
+      m, n = len(grid), len(grid[0])
+      q = []
+      for i in range(m):
+          for j in range(n):
+              if grid[i][j] == 1:
+                  vis = set()
+                  dfs(i, j)
+                  return bfs()
+</pre>
+
 <p class="text-center text-muted"><a href="https://leetcode.com/problems/minesweeper/" target="_blank">https://leetcode.com/problems/minesweeper/</a></p> 
 <pre>
 class Solution:
