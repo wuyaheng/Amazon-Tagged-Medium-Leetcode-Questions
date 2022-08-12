@@ -535,6 +535,22 @@ class Solution:
       return ans
 </pre>
 
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/lexicographical-numbers/" target="_blank">https://leetcode.com/problems/lexicographical-numbers/</a></p> 
+<pre>
+class Solution:
+  def lexicalOrder(self, n: int) -> List[int]:
+      def dfs(u):
+          for i in range(1 if u == 0 else 0, min(9, n) + 1):
+              if u + i <= n:
+                  ans.append(u + i)
+                  if (u + i) * 10 <= n:
+                      dfs((u + i) * 10)
+      
+      ans = []
+      dfs(0)
+      return ans
+</pre>
+
 <p class="text-center text-muted"><a href="https://leetcode.com/problems/evaluate-division/" target="_blank">https://leetcode.com/problems/evaluate-division/</a></p> 
 <pre>
 class Solution:
