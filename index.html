@@ -472,6 +472,27 @@ class Solution:
       return ans
 </pre>
 
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/jump-game-iii/" target="_blank">https://leetcode.com/problems/jump-game-iii/</a></p> 
+<pre>
+class Solution:
+  def canReach(self, arr: List[int], start: int) -> bool:
+      def dfs(i):
+          if arr[i] == 0:
+              return True
+          vis.add(i)
+          ans = False
+          
+          if i + arr[i] < len(arr) and i + arr[i] not in vis:
+              ans |= dfs(i + arr[i])
+          if i - arr[i] >= 0 and i - arr[i] not in vis:
+              ans |= dfs(i - arr[i])
+          
+          return ans
+      
+      vis = set()
+      return dfs(start)
+</pre>
+
 <p class="text-center text-muted"><a href="https://leetcode.com/problems/evaluate-division/" target="_blank">https://leetcode.com/problems/evaluate-division/</a></p> 
 <pre>
 class Solution:
