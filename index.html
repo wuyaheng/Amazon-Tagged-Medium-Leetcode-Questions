@@ -553,6 +553,36 @@ class Solution:
       return True
 </pre>
 
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/minesweeper/" target="_blank">https://leetcode.com/problems/minesweeper/</a></p> 
+<pre>
+class Solution:
+  def updateBoard(self, board: List[List[str]], click: List[int]) -> List[List[str]]:
+      def dfs(i, j):
+          cnt = 0
+          for d in dirs:
+              ni, nj = i + d[0], j + d[1]
+              if 0 <= ni < m and 0 <= nj < n and board[ni][nj] == 'M':
+                  cnt += 1
+          if cnt == 0:
+              board[i][j] = 'B'
+              for d in dirs:
+                  ni, nj = i + d[0], j + d[1]
+                  if 0 <= ni < m and 0 <= nj < n and board[ni][nj] == 'E':
+                      dfs(ni, nj)
+          else:
+              board[i][j] = str(cnt)
+      
+      dirs = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]  
+      m, n = len(board), len(board[0])
+      
+      i, j = click
+      if board[i][j] == 'M': 
+          board[i][j] = 'X'
+      else: 
+          dfs(i, j)
+      return board
+</pre>
+
 <p class="text-center text-muted"><a href="https://leetcode.com/problems/number-of-provinces/" target="_blank">https://leetcode.com/problems/number-of-provinces/</a></p> 
 <pre>
 class Solution:
