@@ -551,6 +551,33 @@ class Solution:
       return ans
 </pre>
 
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/most-stones-removed-with-same-row-or-column/" target="_blank">https://leetcode.com/problems/most-stones-removed-with-same-row-or-column/</a></p> 
+<pre>
+class Solution:
+  def removeStones(self, stones: List[List[int]]) -> int:
+      def dfs(r, c):
+          vis.add((r, c))
+          for nr, nc in g1[r] + g2[c]:
+              if (nr, nc) not in vis:
+                  dfs(nr, nc)
+      
+      g1 = defaultdict(list)
+      g2 = defaultdict(list)
+      
+      for r, c in stones:
+          g1[r].append([r, c])
+          g2[c].append([r, c])
+          
+      ans = 0
+      vis = set()
+      for r, c in stones:
+          if (r, c) not in vis:
+              ans += 1
+              dfs(r, c)
+              
+      return len(stones) - ans
+</pre>
+
 <p class="text-center text-muted"><a href="https://leetcode.com/problems/evaluate-division/" target="_blank">https://leetcode.com/problems/evaluate-division/</a></p> 
 <pre>
 class Solution:
