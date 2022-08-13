@@ -518,6 +518,33 @@ class Solution:
       return ans
 </pre>
 
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/reorder-routes-to-make-all-paths-lead-to-the-city-zero/" target="_blank">https://leetcode.com/problems/reorder-routes-to-make-all-paths-lead-to-the-city-zero/</a></p> 
+<pre>
+class Solution:
+  def minReorder(self, n: int, connections: List[List[int]]) -> int:
+      def dfs(u):
+          nonlocal ans
+          vis.add(u)
+          
+          for v in g[u]:
+              if v not in vis:
+                  if (u, v) not in origin:
+                      ans += 1
+                  dfs(v)
+      
+      origin = set((u, v) for u, v in connections)
+      g = defaultdict(list)
+      
+      for u, v in connections:
+          g[u].append(v)
+          g[v].append(u)
+          
+      ans = 0
+      vis = set()
+      dfs(0)
+      return len(connections) - ans
+</pre>
+
 <p class="text-center text-muted"><a href="https://leetcode.com/problems/possible-bipartition/" target="_blank">https://leetcode.com/problems/possible-bipartition/</a></p> 
 <pre>
 class Solution:
