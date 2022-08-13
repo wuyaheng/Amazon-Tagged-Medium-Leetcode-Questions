@@ -545,6 +545,35 @@ class Solution:
       return len(connections) - ans
 </pre>
 
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/number-of-operations-to-make-network-connected/" target="_blank">https://leetcode.com/problems/number-of-operations-to-make-network-connected/</a></p> 
+<pre>
+class Solution:
+  def makeConnected(self, n: int, connections: List[List[int]]) -> int:
+      def dfs(u):
+          vis.add(u)
+          for v in g[u]:
+              if v not in vis:
+                  dfs(v)
+      
+      if len(connections) < n - 1:
+          return -1
+      
+      g = defaultdict(list)
+      
+      for u, v in connections:
+          g[u].append(v)
+          g[v].append(u)
+          
+      ans = 0
+      vis = set()
+      
+      for i in range(n):
+          if i not in vis:
+              ans += 1
+              dfs(i)
+      return ans - 1
+</pre>
+
 <p class="text-center text-muted"><a href="https://leetcode.com/problems/possible-bipartition/" target="_blank">https://leetcode.com/problems/possible-bipartition/</a></p> 
 <pre>
 class Solution:
