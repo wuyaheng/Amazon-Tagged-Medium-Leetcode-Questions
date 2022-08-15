@@ -968,7 +968,28 @@ class Solution:
       return ans
 </pre>
 
-
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/pyramid-transition-matrix/" target="_blank">https://leetcode.com/problems/pyramid-transition-matrix/</a></p> 
+<pre>
+class Solution:
+  def pyramidTransition(self, bottom: str, allowed: List[str]) -> bool:
+      @lru_cache(None)
+      def dfs(s, i):
+          if len(s) == 1:
+              return True
+          if i == len(s) - 1:
+              return dfs(s[:-1], 0)
+          
+          for c in g[s[i: i + 2]]:
+              if dfs(s[:i] + c + s[i + 1:], i + 1):
+                  return True
+          return False
+          
+      g = defaultdict(list)
+      for s in allowed:
+          g[s[:2]].append(s[-1])
+          
+      return dfs(bottom, 0)
+</pre>
 
 </div>
       </div>
