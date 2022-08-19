@@ -968,6 +968,37 @@ class Solution:
       return ans
 </pre>
 
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/regions-cut-by-slashes/" target="_blank">https://leetcode.com/problems/regions-cut-by-slashes/</a></p> 
+<pre>
+class Solution:
+  def regionsBySlashes(self, grid: List[str]) -> int:
+      def dfs(i, j):
+          g[i][j] = 1
+          for ni, nj in [(i - 1, j), (i + 1, j), (i, j - 1), (i, j + 1)]:
+              if 0 <= ni < m * 3 and 0 <= nj < n * 3 and g[ni][nj] == 0:
+                  dfs(ni, nj)
+      
+      m, n = len(grid), len(grid[0])
+      g = [[0] * n * 3 for _ in range(m * 3)]
+      
+      for i in range(m):
+          for j in range(n):
+              if grid[i][j] == '/':
+                  for k in range(3):
+                      g[i * 3 + k][j * 3 + 2 - k] = 1
+              elif grid[i][j] == '\\':
+                  for k in range(3):
+                      g[i * 3 + k][j * 3 + k] = 1
+                      
+      ans = 0
+      for i in range(m * 3):
+          for j in range(n * 3):
+              if g[i][j] == 0:
+                  ans += 1
+                  dfs(i, j)
+      return ans
+</pre>
+
 <p class="text-center text-muted"><a href="https://leetcode.com/problems/pyramid-transition-matrix/" target="_blank">https://leetcode.com/problems/pyramid-transition-matrix/</a></p> 
 <pre>
 class Solution:
