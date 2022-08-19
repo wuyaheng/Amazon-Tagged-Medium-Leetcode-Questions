@@ -1182,6 +1182,32 @@ class Solution:
       return ans
 </pre>
 
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/nested-list-weight-sum-ii/" target="_blank">https://leetcode.com/problems/nested-list-weight-sum-ii/</a></p> 
+<pre>
+class Solution:
+  def depthSumInverse(self, nestedList: List[NestedInteger]) -> int:
+      def getDep(cur, u):
+          nonlocal mx
+          mx = max(mx, u)
+          for v in cur:
+              if not v.isInteger() and v.getList():
+                  getDep(v.getList(), u + 1)
+      
+      def dfs(cur, u):
+          nonlocal ans
+          for v in cur:
+              if v.isInteger():
+                  ans += v.getInteger() * (mx - u + 1)
+              else:
+                  dfs(v.getList(), u + 1)
+      
+      mx = 0
+      getDep(nestedList, 1)
+      ans = 0
+      dfs(nestedList, 1)
+      return ans
+</pre>
+
 </div>
       </div>
     </div>
