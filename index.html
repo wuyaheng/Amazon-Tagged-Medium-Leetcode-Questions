@@ -240,6 +240,41 @@ class Solution:
       return ans
 </pre>
 
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/count-servers-that-communicate/" target="_blank">https://leetcode.com/problems/count-servers-that-communicate/</a></p> 
+<pre>
+class Solution:
+  def countServers(self, grid: List[List[int]]) -> int:
+      def dfs(i, j):
+          nonlocal cnt
+          cnt += 1
+          vis.add((i, j))
+          
+          for ni, nj in g1[i] + g2[j]:
+              if (ni, nj) not in vis:
+                  dfs(ni, nj)
+       
+      g1 = defaultdict(list)
+      g2 = defaultdict(list)
+      m, n = len(grid), len(grid[0])
+      
+      for i in range(m):
+          for j in range(n):
+              if grid[i][j] == 1:
+                  g1[i].append([i, j])
+                  g2[j].append([i, j])
+  
+      vis = set()
+      ans = 0
+      for i in range(m):
+          for j in range(n):
+              if grid[i][j] == 1 and (i, j) not in vis:
+                  cnt = 0
+                  dfs(i, j)
+                  if cnt > 1:
+                      ans += cnt
+      return ans
+</pre>
+
 <p class="text-center text-muted"><a href="https://leetcode.com/problems/word-search/" target="_blank">https://leetcode.com/problems/word-search/</a></p> 
 <pre>
 class Solution:
