@@ -1111,6 +1111,23 @@ class Solution:
       return False
 </pre>
 
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/flower-planting-with-no-adjacent/" target="_blank">https://leetcode.com/problems/flower-planting-with-no-adjacent/</a></p> 
+<pre>
+class Solution:
+  def gardenNoAdj(self, n: int, paths: List[List[int]]) -> List[int]:
+      ans = [0] * n
+      g = defaultdict(list)
+      
+      for u, v in paths:
+          g[u - 1].append(v - 1)
+          g[v - 1].append(u - 1)
+
+      for i in range(n):
+          ans[i] = ({1, 2, 3, 4} - {ans[j] for j in g[i]}).pop()
+          
+      return ans
+</pre>
+
 </div>
       </div>
     </div>
