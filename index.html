@@ -1029,6 +1029,31 @@ class Solution:
       return ans
 </pre>
 
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/all-paths-from-source-lead-to-destination/" target="_blank">https://leetcode.com/problems/all-paths-from-source-lead-to-destination/</a></p> 
+<pre>
+class Solution:
+  def leadsToDestination(self, n: int, edges: List[List[int]], source: int, destination: int) -> bool:
+      @lru_cache(None)
+      def dfs(u):
+          if not g[u]:
+              return u == destination
+          
+          vis.add(u)
+          for v in g[u]:
+              if v in vis or not dfs(v):
+                  return False
+          vis.remove(u)
+          return True
+      
+      vis = set()
+      g = defaultdict(list)
+      
+      for u, v in edges:
+          g[u].append(v)
+          
+      return dfs(source)
+</pre>
+
 <p class="text-center text-muted"><a href="https://leetcode.com/problems/regions-cut-by-slashes/" target="_blank">https://leetcode.com/problems/regions-cut-by-slashes/</a></p> 
 <pre>
 class Solution:
