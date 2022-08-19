@@ -214,6 +214,32 @@ class Solution:
       return ans
 </pre>
 
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/count-sub-islands/" target="_blank">https://leetcode.com/problems/count-sub-islands/</a></p> 
+<pre>
+class Solution:
+  def countSubIslands(self, grid1: List[List[int]], grid2: List[List[int]]) -> int:
+      def dfs(i, j):
+          nonlocal isSub
+          grid2[i][j] = 0
+          if grid1[i][j] == 0:
+              isSub = False
+          for ni, nj in [(i - 1, j), (i + 1, j), (i, j - 1), (i, j + 1)]:
+              if 0 <= ni < m and 0 <= nj < n and grid2[ni][nj] == 1:
+                  dfs(ni, nj)
+      
+      ans = 0
+      m, n = len(grid1), len(grid1[0]) 
+      
+      for i in range(m):
+          for j in range(n):
+              if grid2[i][j] == 1:
+                  isSub = True
+                  dfs(i, j)
+                  if isSub:
+                      ans += 1
+      return ans
+</pre>
+
 <p class="text-center text-muted"><a href="https://leetcode.com/problems/word-search/" target="_blank">https://leetcode.com/problems/word-search/</a></p> 
 <pre>
 class Solution:
