@@ -193,6 +193,33 @@ class Solution:
       return ans
 </pre>
 
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/throne-inheritance/" target="_blank">https://leetcode.com/problems/throne-inheritance/</a></p> 
+<pre>
+class ThroneInheritance:
+  def __init__(self, kingName: str):
+      self.g = defaultdict(list)
+      self.kingName = kingName
+      self.dead = set()
+
+  def birth(self, parentName: str, childName: str) -> None:
+      self.g[parentName].append(childName)
+
+  def death(self, name: str) -> None:
+      self.dead.add(name)
+
+  def getInheritanceOrder(self) -> List[str]:
+      def dfs(u):
+          if u not in self.dead:
+              ans.append(u)
+              
+          for v in self.g[u]:
+              dfs(v)
+      
+      ans = []
+      dfs(self.kingName)
+      return ans
+</pre>
+
 <p class="text-center text-muted"><a href="https://leetcode.com/problems/number-of-enclaves/" target="_blank">https://leetcode.com/problems/number-of-enclaves/</a></p> 
 <pre>
 class Solution:
