@@ -1156,6 +1156,34 @@ class Solution:
       return dfs(bottom, 0)
 </pre>
 
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/loud-and-rich/" target="_blank">https://leetcode.com/problems/loud-and-rich/</a></p> 
+<pre>
+class Solution:
+  def loudAndRich(self, richer: List[List[int]], quiet: List[int]) -> List[int]:
+      @lru_cache(None)
+      
+      def dfs(u):
+          if not g[u]:
+              return [quiet[u], u]
+          t = min(dfs(v) for v in g[u])
+          t = min(t, [quiet[u], u])
+          
+          if quiet[ans[u]] > quiet[t[1]]:
+              ans[u] = t[1]
+          return t
+      
+      n = len(quiet)
+      ans = list(range(n))
+      g = defaultdict(list)
+      
+      for u, v in richer:
+          g[v].append(u)
+          
+      for i in range(n):
+          dfs(i)
+      return ans
+</pre>
+
 <p class="text-center text-muted"><a href="https://leetcode.com/problems/check-if-there-is-a-valid-path-in-a-grid/" target="_blank">https://leetcode.com/problems/check-if-there-is-a-valid-path-in-a-grid/</a></p> 
 <pre>
 class Solution:
