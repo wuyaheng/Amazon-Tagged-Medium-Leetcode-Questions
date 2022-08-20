@@ -1313,6 +1313,33 @@ class Solution:
       return ans
 </pre>
 
+<hr>
+<h6>&bull; Union Find</h6>
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/redundant-connection/" target="_blank">https://leetcode.com/problems/redundant-connection/</a></p> 
+<pre>
+class Solution:
+  def findRedundantConnection(self, edges: List[List[int]]) -> List[int]:
+      n = len(edges)
+      f = list(range(n))
+      
+      def find(x):
+          if f[x] != x:
+              f[x] = find(f[x])
+          return f[x]
+      
+      def union(x, y):
+          x, y = find(x), find(y)
+          f[x] = y
+          return x != y
+      
+      ans = []
+      for u, v in edges:
+          if not union(u - 1, v - 1):
+              ans = [u, v]
+              
+      return ans
+</pre>
+
 </div>
       </div>
     </div>
