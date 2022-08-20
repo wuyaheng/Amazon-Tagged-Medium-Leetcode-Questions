@@ -1340,6 +1340,31 @@ class Solution:
       return ans
 </pre>
 
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/graph-valid-tree/" target="_blank">https://leetcode.com/problems/graph-valid-tree/</a></p> 
+<pre>
+class Solution:
+  def validTree(self, n: int, edges: List[List[int]]) -> bool:
+      if len(edges) < n - 1:
+          return False
+      
+      f = list(range(n))
+      
+      def find(x):
+          if f[x] != x:
+              f[x] = find(f[x])
+          return f[x]
+          
+      def union(x, y):
+          x, y = find(x), find(y)
+          f[x] = y
+          return x != y
+      
+      for u, v in edges:
+          if not union(u, v):
+              return False
+      return True
+</pre>
+
 </div>
       </div>
     </div>
