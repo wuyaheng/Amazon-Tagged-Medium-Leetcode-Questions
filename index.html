@@ -1472,6 +1472,38 @@ class Solution:
       return len(stones) - sum(k == v for k, v in f.items())
 </pre>
 
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/sentence-similarity-ii/" target="_blank">https://leetcode.com/problems/sentence-similarity-ii/</a></p> 
+<pre>
+class Solution:
+  def areSentencesSimilarTwo(self, sentence1: List[str], sentence2: List[str], similarPairs: List[List[str]]) -> bool:
+      if len(sentence1) != len(sentence2):
+          return False
+      
+      f = {}
+      def find(x):
+          if f[x] != x:
+              f[x] = find(f[x])
+          return f[x]
+      
+      def union(x, y):
+          f[find(x)] = find(y)
+          
+      for u, v in similarPairs:
+          if u not in f:
+              f[u] = u
+          if v not in f:
+              f[v] = v
+          union(u, v)
+      
+      for u, v in zip(sentence1, sentence2):
+          if u != v:
+              if u not in f or v not in f:
+                  return False
+              if find(u) != find(v):
+                  return False
+      return True
+</pre>
+
 <p class="text-center text-muted"><a href="https://leetcode.com/problems/minimize-hamming-distance-after-swap-operations/" target="_blank">https://leetcode.com/problems/minimize-hamming-distance-after-swap-operations/</a></p> 
 <pre>
 class Solution:
