@@ -1530,6 +1530,41 @@ class Solution:
       return len(set(find(s) for s in strs))
 </pre>
 
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/lexicographically-smallest-equivalent-string/" target="_blank">https://leetcode.com/problems/lexicographically-smallest-equivalent-string/</a></p> 
+<pre>
+class Solution:
+  def smallestEquivalentString(self, s1: str, s2: str, baseStr: str) -> str:
+      f = {}
+      
+      def find(x):
+          if f[x] != x:
+              f[x] = find(f[x])
+          return f[x]
+      
+      def union(x, y):
+          f[find(x)] = find(y)
+          
+      for u, v in zip(s1, s2):
+          if u not in f:
+              f[u] = u
+          if v not in f:
+              f[v] = v
+          union(u, v)
+      
+      d = defaultdict(lambda: 'z')
+
+      for s in f:
+          d[find(s)] = min(d[find(s)], s)
+      
+      s = list(baseStr)
+      
+      for i in range(len(baseStr)):
+          if s[i] in f:
+              s[i] = d[find(s[i])]
+              
+      return ''.join(s)
+</pre>
+
 <p class="text-center text-muted"><a href="https://leetcode.com/problems/accounts-merge/" target="_blank">https://leetcode.com/problems/accounts-merge/</a></p> 
 <pre>
 class Solution:
