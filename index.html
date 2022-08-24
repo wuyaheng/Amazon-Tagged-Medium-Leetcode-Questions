@@ -1730,6 +1730,28 @@ class Solution:
       return ans
 </pre>
 
+<hr>
+<h6>&bull; BFS</h6>
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/letter-combinations-of-a-phone-number/" target="_blank">https://leetcode.com/problems/letter-combinations-of-a-phone-number/</a></p> 
+<pre>
+class Solution:
+  def letterCombinations(self, digits: str) -> List[str]:
+      if digits == "":
+          return []
+      
+      s = ["", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz" ]
+      
+      a = [""]
+      for c in digits:
+          b = []
+          for cur in a:
+              for ch in s[int(c)]:
+                  b.append(cur + ch)
+          a = b
+      
+      return a
+</pre>
+
 </div>
       </div>
     </div>
