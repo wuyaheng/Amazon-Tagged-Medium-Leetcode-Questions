@@ -1778,6 +1778,43 @@ class Solution:
       return time
 </pre>
 
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/" target="_blank">https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/</a></p> 
+<pre>
+class Solution:
+  def distanceK(self, root: TreeNode, target: TreeNode, k: int) -> List[int]:
+      def build(root, p):
+          par[root] = p
+          if root.left:
+              build(root.left, root)
+          if root.right:
+              build(root.right, root)
+          
+      par = defaultdict(TreeNode)
+      build(root, None)
+      
+      ans = []
+      q = deque()
+      q.append([target, 0])
+      vis = {target}
+      
+      while q:
+          cur, step = q.popleft()
+          if step == k:
+              ans.append(cur.val)
+              continue
+          if cur.left and cur.left not in vis:
+              q.append([cur.left, step + 1])
+              vis.add(cur.left)
+          if cur.right and cur.right not in vis:
+              q.append([cur.right, step + 1])
+              vis.add(cur.right)
+          if par[cur] and par[cur] not in vis:
+              q.append([par[cur], step + 1])
+              vis.add(par[cur])
+              
+      return ans
+</pre>
+
 </div>
       </div>
     </div>
