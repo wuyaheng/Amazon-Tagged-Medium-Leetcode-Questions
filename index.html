@@ -1806,6 +1806,27 @@ class Solution:
       return -1
 </pre>
 
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/minimum-knight-moves/" target="_blank">https://leetcode.com/problems/minimum-knight-moves/</a></p> 
+<pre>
+class Solution:
+  def minKnightMoves(self, x: int, y: int) -> int:
+      dirs = [[-2, 1], [-1, 2], [1, 2], [2, 1], [2, -1], [1, -2], [-1, -2], [-2, -1]]
+      q = deque()
+      vis = set()
+      q.append((0, 0, 0))
+      
+      while q:
+          i, j, k = q.popleft()
+          if i == x and j == y:
+              return k
+          
+          for a, b in dirs:
+              ni, nj = i + a, j + b
+              if (ni, nj) not in vis:
+                  vis.add((ni, nj))
+                  q.append((ni, nj, k + 1))
+</pre>
+
 <p class="text-center text-muted"><a href="https://leetcode.com/problems/01-matrix/" target="_blank">https://leetcode.com/problems/01-matrix/</a></p> 
 <pre>
 class Solution:
