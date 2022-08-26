@@ -1778,6 +1778,33 @@ class Solution:
       return time
 </pre>
 
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/01-matrix/" target="_blank">https://leetcode.com/problems/01-matrix/</a></p> 
+<pre>
+class Solution:
+  def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:
+      m, n = len(mat), len(mat[0])
+      g = [[0] * n for _ in range(m)]
+      
+      q = deque()
+      vis = set()
+      
+      for i in range(m):
+          for j in range(n):
+              if mat[i][j] == 0:
+                  vis.add((i, j))
+                  q.append((i, j, 0))
+                  
+      while q:
+          i, j, k = q.popleft()
+          for ni, nj in [(i - 1, j), (i + 1, j), (i, j - 1), (i, j + 1)]:
+              if 0 <= ni < m and 0 <= nj < n and (ni, nj) not in vis:
+                  vis.add((ni, nj))
+                  q.append((ni, nj, k + 1))
+                  g[ni][nj] = k + 1
+                  
+      return g
+</pre>
+
 <p class="text-center text-muted"><a href="https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/" target="_blank">https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/</a></p> 
 <pre>
 class Solution:
