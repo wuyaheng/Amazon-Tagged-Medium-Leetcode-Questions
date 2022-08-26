@@ -1778,6 +1778,34 @@ class Solution:
       return time
 </pre>
 
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/shortest-path-to-get-food/" target="_blank">https://leetcode.com/problems/shortest-path-to-get-food/</a></p> 
+<pre>
+class Solution:
+  def getFood(self, grid: List[List[str]]) -> int:
+      m, n = len(grid), len(grid[0])
+      vis = set()
+      q = deque()
+      
+      for i in range(m):
+          for j in range(n):
+              if grid[i][j] == 'X':
+                  vis.add((i, j))
+              elif grid[i][j] == '*':
+                  vis.add((i, j))
+                  q.append((i, j, 0))
+      
+      while q:
+          i, j, k = q.popleft()
+          if grid[i][j] == '#':
+              return k
+          for ni, nj in [(i - 1, j), (i + 1, j), (i, j - 1), (i, j + 1)]:
+              if 0 <= ni < m and 0 <= nj < n and (ni, nj) not in vis:
+                  vis.add((ni, nj))
+                  q.append((ni, nj, k + 1))
+                  
+      return -1
+</pre>
+
 <p class="text-center text-muted"><a href="https://leetcode.com/problems/01-matrix/" target="_blank">https://leetcode.com/problems/01-matrix/</a></p> 
 <pre>
 class Solution:
