@@ -1805,6 +1805,31 @@ class Solution:
       return g
 </pre>
 
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/walls-and-gates/" target="_blank">https://leetcode.com/problems/walls-and-gates/</a></p> 
+<pre>
+class Solution:
+  def wallsAndGates(self, rooms: List[List[int]]) -> None:
+      m, n = len(rooms), len(rooms[0])
+      q = deque()
+      vis = set()
+      
+      for i in range(m):
+          for j in range(n):
+              if rooms[i][j] == 0:
+                  vis.add((i, j))
+                  q.append((i, j, 0))
+              elif rooms[i][j] == -1:
+                  vis.add((i, j))
+                  
+      while q:
+          i, j, k = q.popleft()
+          for ni, nj in [(i - 1, j), (i + 1, j), (i, j - 1), (i, j + 1)]:
+              if 0 <= ni < m and 0 <= nj < n and (ni, nj) not in vis:
+                  vis.add((ni, nj))
+                  q.append((ni, nj, k + 1))
+                  rooms[ni][nj] = k + 1
+</pre>
+
 <p class="text-center text-muted"><a href="https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/" target="_blank">https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/</a></p> 
 <pre>
 class Solution:
