@@ -1951,6 +1951,27 @@ class Solution:
       return -1
 </pre>
 
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/web-crawler/" target="_blank">https://leetcode.com/problems/web-crawler/</a></p> 
+<pre>
+class Solution:
+  def crawl(self, startUrl: str, htmlParser: 'HtmlParser') -> List[str]:
+      p = startUrl.find('/', 7)
+      host = startUrl if p == -1 else startUrl[ : p]
+      a = [startUrl]
+      ans = {startUrl}
+      
+      while a:
+          b = []
+          for s in a:
+              for url in htmlParser.getUrls(s):
+                  if url not in ans and url.startswith(host):
+                      ans.add(url)
+                      b.append(url)
+          a = b
+          
+      return list(ans)
+</pre>
+
 </div>
       </div>
     </div>
