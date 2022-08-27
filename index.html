@@ -1972,6 +1972,40 @@ class Solution:
       return list(ans)
 </pre>
 
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/open-the-lock/" target="_blank">https://leetcode.com/problems/open-the-lock/</a></p> 
+<pre>
+class Solution:
+  def openLock(self, deadends: List[str], target: str) -> int:
+      vis = set(deadends)
+      
+      if '0000' in vis:
+          return -1
+      
+      q = deque()
+      q.append(('0000', 0))
+      vis.add('0000')
+      
+      while q:
+          s, k = q.popleft()
+          if s == target:
+              return k
+          
+          for d in [-1, 1]:
+              s = list(s)
+              for i in range(4):
+                  t = s[i]
+                  
+                  s[i] = str((int(s[i]) + d) % 10)
+                  ns = ''.join(s)
+                  if ns not in vis:
+                      vis.add(ns)
+                      q.append((ns, k + 1))
+  
+                  s[i] = t
+              
+      return -1
+</pre>
+
 </div>
       </div>
     </div>
