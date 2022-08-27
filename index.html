@@ -1879,6 +1879,33 @@ class Solution:
                   rooms[ni][nj] = k + 1
 </pre>
 
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/as-far-from-land-as-possible/" target="_blank">https://leetcode.com/problems/as-far-from-land-as-possible/</a></p> 
+<pre>
+class Solution:
+  def maxDistance(self, grid: List[List[int]]) -> int:
+      m, n = len(grid), len(grid[0])
+      q = deque()
+      vis = set()
+      
+      for i in range(m):
+          for j in range(n):
+              if grid[i][j] == 1:
+                  q.append((i, j, 0))
+                  vis.add((i, j))
+      
+      ans = -1
+      while q:
+          i, j, k = q.popleft()
+          if grid[i][j] == 0:
+              ans = max(ans, k)
+              
+          for ni, nj in [(i - 1, j), (i + 1, j), (i, j - 1), (i, j + 1)]:
+              if 0 <= ni < m and 0 <= nj < n and (ni, nj) not in vis:
+                  q.append((ni, nj, k + 1))
+                  vis.add((ni, nj))
+      return ans
+</pre>
+
 <p class="text-center text-muted"><a href="https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/" target="_blank">https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/</a></p> 
 <pre>
 class Solution:
