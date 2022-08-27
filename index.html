@@ -1906,6 +1906,39 @@ class Solution:
       return ans
 </pre>
 
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/minimum-genetic-mutation/" target="_blank">https://leetcode.com/problems/minimum-genetic-mutation/</a></p> 
+<pre>
+class Solution:
+  def minMutation(self, start: str, end: str, bank: List[str]) -> int:
+      q = deque()
+      q.append((start, 0))
+      
+      vis = set()
+      vis.add(start)
+      
+      bank = set(bank)
+      if end in vis:
+          return -1
+      
+      while q:
+          s, k = q.popleft()
+          if s == end:
+              return k
+          s = list(s)
+          for i in range(8):
+              
+              t = s[i]
+              for c in {'A', 'C', 'G', 'T'} - {t}:
+                  s[i] = c
+                  ns = ''.join(s)
+                  if ns not in vis and ns in bank:
+                      vis.add(ns)
+                      q.append((ns, k + 1))
+              s[i] = t
+              
+      return -1
+</pre>
+
 <p class="text-center text-muted"><a href="https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/" target="_blank">https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/</a></p> 
 <pre>
 class Solution:
