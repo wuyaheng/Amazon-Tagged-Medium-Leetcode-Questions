@@ -2316,6 +2316,35 @@ class Solution:
       return -1
 </pre>
 
+<hr>
+<h6>&bull; Topological Sort</h6>
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/course-schedule/" target="_blank">https://leetcode.com/problems/course-schedule/</a></p> 
+<pre>
+class Solution:
+  def canFinish(self, n: int, prerequisites: List[List[int]]) -> bool:
+      ind = [0] * n
+      d = defaultdict(list)
+      q = deque()
+      
+      for u, v in prerequisites:
+          ind[u] += 1
+          d[v].append(u)
+      
+      for i in range(n):
+          if ind[i] == 0:
+              q.append(i)
+              
+      while q:
+          u = q.popleft()
+          n -= 1
+          for v in d[u]:
+              ind[v] -= 1
+              if ind[v] == 0:
+                  q.append(v)
+      
+      return n == 0
+</pre>
+
 </div>
       </div>
     </div>
