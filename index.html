@@ -2058,6 +2058,25 @@ class Solution:
       return list(ans)
 </pre>
 
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/water-and-jug-problem/" target="_blank">https://leetcode.com/problems/water-and-jug-problem/</a></p> 
+<pre>
+class Solution:
+  def canMeasureWater(self, x: int, y: int, t: int) -> bool:
+      q = deque()
+      q.append((x, y, 0))
+      vis = {(x, y)}
+      
+      while q:
+          a, b, k = q.popleft()
+          if a + b == t:
+              return True
+          for na, nb in [(x, b), (a, y), (0, b), (a, 0), (min(x, a + b), max(0, a + b - x)), (max(0, a + b - y), min(y, a + b))]:
+              if (na, nb) not in vis:
+                  q.append((na, nb, k + 1))
+                  vis.add((na, nb))
+      return False
+</pre>
+
 <p class="text-center text-muted"><a href="https://leetcode.com/problems/open-the-lock/" target="_blank">https://leetcode.com/problems/open-the-lock/</a></p> 
 <pre>
 class Solution:
