@@ -1854,6 +1854,27 @@ class Solution:
                   q.append((ni, nj, k + 1))
 </pre>
 
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/nearest-exit-from-entrance-in-maze/" target="_blank">https://leetcode.com/problems/nearest-exit-from-entrance-in-maze/</a></p> 
+<pre>
+class Solution:
+  def nearestExit(self, maze: List[List[str]], entrance: List[int]) -> int:
+      m, n = len(maze), len(maze[0])
+      q = deque()
+      q.append((entrance[0], entrance[1], 0))
+      vis = {(entrance[0], entrance[1])}
+      
+      while q:
+          i, j, k = q.popleft()
+          if (i == 0 or j == 0 or i == m - 1 or j == n - 1) and [i, j] != entrance:
+              return k
+          for ni, nj in [(i - 1, j), (i + 1, j), (i, j - 1), (i, j + 1)]:
+              if 0 <= ni < m and 0 <= nj < n and (ni, nj) not in vis and maze[ni][nj] == '.':
+                  q.append((ni, nj, k + 1))
+                  vis.add((ni, nj))
+                  
+      return -1
+</pre>
+
 <p class="text-center text-muted"><a href="https://leetcode.com/problems/01-matrix/" target="_blank">https://leetcode.com/problems/01-matrix/</a></p> 
 <pre>
 class Solution:
