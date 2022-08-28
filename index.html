@@ -1875,6 +1875,28 @@ class Solution:
       return -1
 </pre>
 
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/minimum-operations-to-convert-number/" target="_blank">https://leetcode.com/problems/minimum-operations-to-convert-number/</a></p> 
+<pre>
+class Solution:
+  def minimumOperations(self, nums: List[int], start: int, goal: int) -> int:
+      q = deque()
+      q.append((start, 0))
+      vis = {start}
+      
+      while q:
+          u, k = q.popleft()
+          if u == goal:
+              return k
+          for x in nums:
+              for v in [u + x, u - x, u ^ x]:
+                  if v == goal:
+                      return k + 1
+                  if 0 <= v <= 1000 and v not in vis:
+                      q.append((v, k + 1))
+                      vis.add(v)
+      return -1
+</pre>
+
 <p class="text-center text-muted"><a href="https://leetcode.com/problems/01-matrix/" target="_blank">https://leetcode.com/problems/01-matrix/</a></p> 
 <pre>
 class Solution:
