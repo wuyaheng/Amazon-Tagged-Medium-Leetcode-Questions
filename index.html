@@ -2077,6 +2077,27 @@ class Solution:
       return False
 </pre>
 
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/get-watched-videos-by-your-friends/" target="_blank">https://leetcode.com/problems/get-watched-videos-by-your-friends/</a></p> 
+<pre>
+class Solution:
+  def watchedVideosByFriends(self, watchedVideos: List[List[str]], friends: List[List[int]], id: int, level: int) -> List[str]:
+      ans = Counter()
+      q = deque()
+      q.append((id, 0))
+      vis = {id}
+      
+      while q:
+          u, k = q.popleft()
+          if k == level:
+              ans += Counter(watchedVideos[u])
+              continue
+          for v in friends[u]:
+              if v not in vis:
+                  vis.add(v)
+                  q.append((v, k + 1))
+      return [k for k, v in sorted(ans.items(), key = lambda x: (x[1], x[0]))]
+</pre>
+
 <p class="text-center text-muted"><a href="https://leetcode.com/problems/open-the-lock/" target="_blank">https://leetcode.com/problems/open-the-lock/</a></p> 
 <pre>
 class Solution:
