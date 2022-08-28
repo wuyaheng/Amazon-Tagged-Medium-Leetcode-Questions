@@ -2245,6 +2245,34 @@ class Solution:
       return ans
 </pre>
 
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/minimum-jumps-to-reach-home/" target="_blank">https://leetcode.com/problems/minimum-jumps-to-reach-home/</a></p> 
+<pre>
+class Solution:
+  def minimumJumps(self, forbidden: List[int], a: int, b: int, x: int) -> int:
+      q = deque()
+      q.append((0, 1, 0))
+      vis = {(0, 1)}
+      
+      for v in forbidden:
+          vis.add((v, 0))
+          vis.add((v, 1))
+          
+      while q:
+          p, back, k = q.popleft()
+          if p == x:
+              return k
+          
+          if p + a <= 6005 and (p + a, 1) not in vis:
+              q.append((p + a, 1, k + 1))
+              vis.add((p + a, 1))
+              
+          if back and p - b >= 0 and (p - b, 0) not in vis:
+              q.append((p - b, 0, k + 1))
+              vis.add((p - b, 0))
+              
+      return -1
+</pre>
+
 </div>
       </div>
     </div>
