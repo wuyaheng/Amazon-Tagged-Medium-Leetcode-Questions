@@ -1854,6 +1854,32 @@ class Solution:
       return g
 </pre>
 
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/map-of-highest-peak/" target="_blank">https://leetcode.com/problems/map-of-highest-peak/</a></p> 
+<pre>
+class Solution:
+  def highestPeak(self, isWater: List[List[int]]) -> List[List[int]]:
+      m, n = len(isWater), len(isWater[0])
+      g = [[0] * n for _ in range(m)]
+      q = deque()
+      vis = set()
+      
+      for i in range(m):
+          for j in range(n):
+              if isWater[i][j] == 1:
+                  q.append((i, j, 0))
+                  vis.add((i, j))
+      
+      while q:
+          i, j, k = q.popleft()
+          for ni, nj in [(i - 1, j), (i + 1, j), (i, j - 1), (i, j + 1)]:
+              if 0 <= ni < m and 0 <= nj < n and (ni, nj) not in vis:
+                  g[ni][nj] = k + 1
+                  q.append((ni, nj, k + 1))
+                  vis.add((ni, nj))
+                  
+      return g
+</pre>
+
 <p class="text-center text-muted"><a href="https://leetcode.com/problems/walls-and-gates/" target="_blank">https://leetcode.com/problems/walls-and-gates/</a></p> 
 <pre>
 class Solution:
