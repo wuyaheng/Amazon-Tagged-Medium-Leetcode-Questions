@@ -1752,6 +1752,33 @@ class Solution:
       return a
 </pre>
 
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/brace-expansion/" target="_blank">https://leetcode.com/problems/brace-expansion/</a></p> 
+<pre>
+class Solution:
+  def expand(self, s: str) -> List[str]:
+      n = len(s)
+      a = ['']
+      i = 0
+      
+      while i < n:
+          b = []
+          
+          if s[i] == '{':
+              j = s.find('}', i)
+              t = [c for c in s[i + 1: j] if c.isalpha()]
+              i = j + 1
+          else:
+              t = s[i]
+              i = i + 1
+          
+          for c in t:
+              for cur in a:
+                  b.append(cur + c)
+          a = b
+          
+      return sorted(a)
+</pre>
+
 <p class="text-center text-muted"><a href="https://leetcode.com/problems/rotting-oranges/" target="_blank">https://leetcode.com/problems/rotting-oranges/</a></p> 
 <pre>
 class Solution:
