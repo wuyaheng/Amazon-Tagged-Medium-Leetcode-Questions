@@ -2323,12 +2323,12 @@ class Solution:
 class Solution:
   def canFinish(self, n: int, prerequisites: List[List[int]]) -> bool:
       ind = [0] * n
-      d = defaultdict(list)
+      g = defaultdict(list)
       q = deque()
       
       for u, v in prerequisites:
           ind[u] += 1
-          d[v].append(u)
+          g[v].append(u)
       
       for i in range(n):
           if ind[i] == 0:
@@ -2337,12 +2337,40 @@ class Solution:
       while q:
           u = q.popleft()
           n -= 1
-          for v in d[u]:
+          for v in g[u]:
               ind[v] -= 1
               if ind[v] == 0:
                   q.append(v)
       
       return n == 0
+</pre>
+
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/course-schedule-ii/" target="_blank">https://leetcode.com/problems/course-schedule-ii/</a></p> 
+<pre>
+class Solution:
+  def findOrder(self, n: int, prerequisites: List[List[int]]) -> List[int]:
+      ans = []
+      q = deque()
+      ind = [0] * n
+      g = defaultdict(list)
+      
+      for u, v in prerequisites:
+          ind[u] += 1
+          g[v].append(u)
+      
+      for i in range(n):
+          if ind[i] == 0:
+              q.append(i)
+              
+      while q:
+          u = q.popleft()
+          ans.append(u)
+          for v in g[u]:
+              ind[v] -= 1
+              if ind[v] == 0:
+                  q.append(v)
+      
+      return ans if len(ans) == n else []
 </pre>
 
 </div>
