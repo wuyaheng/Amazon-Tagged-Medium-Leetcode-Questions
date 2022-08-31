@@ -2373,6 +2373,35 @@ class Solution:
       return ans if len(ans) == n else []
 </pre>
 
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/course-schedule-iv/" target="_blank">https://leetcode.com/problems/course-schedule-iv/</a></p> 
+<pre>
+class Solution:
+  def checkIfPrerequisite(self, n: int, prerequisites: List[List[int]], queries: List[List[int]]) -> List[bool]:
+      q = deque()
+      ind = [0] * n
+      g = defaultdict(list)
+      
+      for u, v in prerequisites:
+          ind[v] += 1
+          g[u].append(v)
+          
+      pre = defaultdict(set)
+      
+      for i in range(n):
+          if ind[i] == 0:
+              q.append(i)
+              
+      while q:
+          u = q.popleft()
+          for v in g[u]:
+              pre[v] |= {u} | pre[u]
+              ind[v] -= 1
+              if ind[v] == 0:
+                  q.append(v)
+      
+      return [u in pre[v] for u, v in queries]
+</pre>
+
 </div>
       </div>
     </div>
