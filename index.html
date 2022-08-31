@@ -2402,6 +2402,31 @@ class Solution:
       return [u in pre[v] for u, v in queries]
 </pre>
 
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/find-all-possible-recipes-from-given-supplies/" target="_blank">https://leetcode.com/problems/find-all-possible-recipes-from-given-supplies/</a></p> 
+<pre>
+class Solution:
+  def findAllRecipes(self, recipes: List[str], ingredients: List[List[str]], supplies: List[str]) -> List[str]:
+      ind = defaultdict(int)
+      g = defaultdict(list)
+      q = deque(supplies)
+      ans = []
+      
+      for u, v in zip(recipes, ingredients):
+          for s in v:
+              g[s].append(u)
+              ind[u] += 1
+      
+      while q:
+          u = q.popleft()
+          for v in g[u]:
+              ind[v] -= 1
+              if ind[v] == 0:
+                  q.append(v)
+                  ans.append(v)
+                  
+      return ans
+</pre>
+
 </div>
       </div>
     </div>
